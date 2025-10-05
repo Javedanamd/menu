@@ -1,0 +1,247 @@
+[
+  {
+    "Category": "Vegetarian",
+    "Dish Name": "Paneer Butter Masala",
+    "Price (INR)": 250,
+    "Calories": 450,
+    "Ingredients": "Paneer, Tomato, Butter, Spices"
+  },
+  {
+    "Category": "Vegetarian",
+    "Dish Name": "Veg Biryani",
+    "Price (INR)": 200,
+    "Calories": 400,
+    "Ingredients": "Rice, Mixed Vegetables, Spices"
+  },
+  {
+    "Category": "Vegetarian",
+    "Dish Name": "Chana Masala",
+    "Price (INR)": 180,
+    "Calories": 380,
+    "Ingredients": "Chickpeas, Onion, Tomato, Spices"
+  },
+  {
+    "Category": "Vegetarian",
+    "Dish Name": "Palak Paneer",
+    "Price (INR)": 240,
+    "Calories": 410,
+    "Ingredients": "Spinach, Paneer, Spices"
+  },
+  {
+    "Category": "Vegetarian",
+    "Dish Name": "Aloo Gobi",
+    "Price (INR)": 190,
+    "Calories": 370,
+    "Ingredients": "Potato, Cauliflower, Spices"
+  },
+  {
+    "Category": "Vegetarian",
+    "Dish Name": "Dal Tadka",
+    "Price (INR)": 170,
+    "Calories": 360,
+    "Ingredients": "Lentils, Onion, Tomato, Spices"
+  },
+  {
+    "Category": "Vegetarian",
+    "Dish Name": "Matar Paneer",
+    "Price (INR)": 210,
+    "Calories": 430,
+    "Ingredients": "Paneer, Peas, Tomato, Spices"
+  },
+  {
+    "Category": "Vegetarian",
+    "Dish Name": "Vegetable Korma",
+    "Price (INR)": 230,
+    "Calories": 440,
+    "Ingredients": "Vegetables, Cream, Spices"
+  },
+  {
+    "Category": "Vegetarian",
+    "Dish Name": "Bhindi Masala",
+    "Price (INR)": 200,
+    "Calories": 390,
+    "Ingredients": "Okra, Onion, Tomato, Spices"
+  },
+  {
+    "Category": "Vegetarian",
+    "Dish Name": "Kadai Mushroom",
+    "Price (INR)": 220,
+    "Calories": 420,
+    "Ingredients": "Mushroom, Onion, Tomato, Spices"
+  },
+  {
+    "Category": "Non-Vegetarian",
+    "Dish Name": "Chicken Biryani",
+    "Price (INR)": 300,
+    "Calories": 600,
+    "Ingredients": "Rice, Chicken, Spices"
+  },
+  {
+    "Category": "Non-Vegetarian",
+    "Dish Name": "Butter Chicken",
+    "Price (INR)": 350,
+    "Calories": 700,
+    "Ingredients": "Chicken, Tomato, Butter, Cream, Spices"
+  },
+  {
+    "Category": "Non-Vegetarian",
+    "Dish Name": "Fish Curry",
+    "Price (INR)": 320,
+    "Calories": 550,
+    "Ingredients": "Fish, Coconut Milk, Spices"
+  },
+  {
+    "Category": "Non-Vegetarian",
+    "Dish Name": "Mutton Rogan Josh",
+    "Price (INR)": 380,
+    "Calories": 680,
+    "Ingredients": "Mutton, Onion, Yogurt, Spices"
+  },
+  {
+    "Category": "Non-Vegetarian",
+    "Dish Name": "Prawn Masala",
+    "Price (INR)": 360,
+    "Calories": 590,
+    "Ingredients": "Prawns, Coconut, Spices"
+  },
+  {
+    "Category": "Non-Vegetarian",
+    "Dish Name": "Egg Curry",
+    "Price (INR)": 250,
+    "Calories": 500,
+    "Ingredients": "Eggs, Tomato, Spices"
+  },
+  {
+    "Category": "Non-Vegetarian",
+    "Dish Name": "Chicken Korma",
+    "Price (INR)": 340,
+    "Calories": 620,
+    "Ingredients": "Chicken, Yogurt, Cream, Spices"
+  },
+  {
+    "Category": "Non-Vegetarian",
+    "Dish Name": "Grilled Fish",
+    "Price (INR)": 330,
+    "Calories": 560,
+    "Ingredients": "Fish, Lemon, Spices"
+  },
+  {
+    "Category": "Non-Vegetarian",
+    "Dish Name": "Tandoori Chicken",
+    "Price (INR)": 310,
+    "Calories": 610,
+    "Ingredients": "Chicken, Yogurt, Spices"
+  },
+  {
+    "Category": "Non-Vegetarian",
+    "Dish Name": "Chicken 65",
+    "Price (INR)": 290,
+    "Calories": 580,
+    "Ingredients": "Chicken, Spices, Curry Leaves"
+  },
+  {
+    "Category": "Sweet",
+    "Dish Name": "Gulab Jamun",
+    "Price (INR)": 80,
+    "Calories": 250,
+    "Ingredients": "Milk, Sugar, Cardamom"
+  },
+  {
+    "Category": "Sweet",
+    "Dish Name": "Rasgulla",
+    "Price (INR)": 70,
+    "Calories": 220,
+    "Ingredients": "Chenna, Sugar Syrup"
+  },
+  {
+    "Category": "Sweet",
+    "Dish Name": "Jalebi",
+    "Price (INR)": 60,
+    "Calories": 300,
+    "Ingredients": "Flour, Sugar, Ghee"
+  },
+  {
+    "Category": "Sweet",
+    "Dish Name": "Kaju Katli",
+    "Price (INR)": 90,
+    "Calories": 270,
+    "Ingredients": "Cashew, Sugar, Ghee"
+  },
+  {
+    "Category": "Sweet",
+    "Dish Name": "Mysore Pak",
+    "Price (INR)": 100,
+    "Calories": 260,
+    "Ingredients": "Besan, Sugar, Ghee"
+  },
+  {
+    "Category": "Sweet",
+    "Dish Name": "Ladoo",
+    "Price (INR)": 60,
+    "Calories": 280,
+    "Ingredients": "Flour, Sugar, Cardamom"
+  },
+  {
+    "Category": "Sweet",
+    "Dish Name": "Rasmalai",
+    "Price (INR)": 110,
+    "Calories": 310,
+    "Ingredients": "Milk, Sugar, Saffron"
+  },
+  {
+    "Category": "Sweet",
+    "Dish Name": "Barfi",
+    "Price (INR)": 95,
+    "Calories": 290,
+    "Ingredients": "Milk, Sugar, Nuts"
+  },
+  {
+    "Category": "Sweet",
+    "Dish Name": "Halwa",
+    "Price (INR)": 85,
+    "Calories": 240,
+    "Ingredients": "Semolina, Ghee, Sugar"
+  },
+  {
+    "Category": "Sweet",
+    "Dish Name": "Sandesh",
+    "Price (INR)": 105,
+    "Calories": 230,
+    "Ingredients": "Chenna, Sugar"
+  },
+  {
+    "Category": "Ice Cream",
+    "Dish Name": "Vanilla Ice Cream",
+    "Price (INR)": 70,
+    "Calories": 200,
+    "Ingredients": "Milk, Cream, Vanilla Essence, Sugar"
+  },
+  {
+    "Category": "Ice Cream",
+    "Dish Name": "Chocolate Ice Cream",
+    "Price (INR)": 80,
+    "Calories": 220,
+    "Ingredients": "Milk, Cream, Cocoa, Sugar"
+  },
+  {
+    "Category": "Ice Cream",
+    "Dish Name": "Strawberry Ice Cream",
+    "Price (INR)": 75,
+    "Calories": 210,
+    "Ingredients": "Milk, Cream, Strawberry, Sugar"
+  },
+  {
+    "Category": "Ice Cream",
+    "Dish Name": "Mango Ice Cream",
+    "Price (INR)": 85,
+    "Calories": 230,
+    "Ingredients": "Milk, Cream, Mango Pulp, Sugar"
+  },
+  {
+    "Category": "Ice Cream",
+    "Dish Name": "Butterscotch Ice Cream",
+    "Price (INR)": 80,
+    "Calories": 215,
+    "Ingredients": "Milk, Cream, Butterscotch, Sugar"
+  }
+]
