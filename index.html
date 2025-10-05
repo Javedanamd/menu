@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu App</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Lucide React Icons (inline SVG components)
+        const ShoppingCart = ({ className }) => (
+            <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+        );
+
+        const Phone = ({ className }) => (
+            <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+        );
+
+        const X = ({ className }) => (
+            <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        );
+
+        const ChevronLeft = ({ className }) => (
+            <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        );
+
+        const menuData = [
+            {"Category": "Vegetarian", "Dish Name": "Paneer Butter Masala", "Price (INR)": 250, "Calories": 450, "Ingredients": "Paneer, Tomato, Butter, Spices"},
+            {"Category": "Vegetarian", "Dish Name": "Veg Biryani", "Price (INR)": 200, "Calories": 400, "Ingredients": "Rice, Mixed Vegetables, Spices"},
+            {"Category": "Vegetarian", "Dish Name": "Chana Masala", "Price (INR)": 180, "Calories": 380, "Ingredients": "Chickpeas, Onion, Tomato, Spices"},
+            {"Category": "Vegetarian", "Dish Name": "Palak Paneer", "Price (INR)": 240, "Calories": 410, "Ingredients": "Spinach, Paneer, Spices"},
+            {"Category": "Vegetarian", "Dish Name": "Aloo Gobi", "Price (INR)": 190, "Calories": 370, "Ingredients": "Potato, Cauliflower, Spices"},
+            {"Category": "Vegetarian", "Dish Name": "Dal Tadka", "Price (INR)": 170, "Calories": 360, "Ingredients": "Lentils, Onion, Tomato, Spices"},
+            {"Category": "Vegetarian", "Dish Name": "Matar Paneer", "Price (INR)": 210, "Calories": 430, "Ingredients": "Paneer, Peas, Tomato, Spices"},
+            {"Category": "Vegetarian", "Dish Name": "Vegetable Korma", "Price (INR)": 230, "Calories": 440, "Ingredients": "Vegetables, Cream, Spices"},
+            {"Category": "Vegetarian", "Dish Name": "Bhindi Masala", "Price (INR)": 200, "Calories": 390, "Ingredients": "Okra, Onion, Tomato, Spices"},
+            {"Category": "Vegetarian", "Dish Name": "Kadai Mushroom", "Price (INR)": 220, "Calories": 420, "Ingredients": "Mushroom, Onion, Tomato, Spices"},
+            {"Category": "Non-Vegetarian", "Dish Name": "Chicken Biryani", "Price (INR)": 300, "Calories": 600, "Ingredients": "Rice, Chicken, Spices"},
+            {"Category": "Non-Vegetarian", "Dish Name": "Butter Chicken", "Price (INR)": 350, "Calories": 700, "Ingredients": "Chicken, Tomato, Butter, Cream, Spices"},
+            {"Category": "Non-Vegetarian", "Dish Name": "Fish Curry", "Price (INR)": 320, "Calories": 550, "Ingredients": "Fish, Coconut Milk, Spices"},
+            {"Category": "Non-Vegetarian", "Dish Name": "Mutton Rogan Josh", "Price (INR)": 380, "Calories": 680, "Ingredients": "Mutton, Onion, Yogurt, Spices"},
+            {"Category": "Non-Vegetarian", "Dish Name": "Prawn Masala", "Price (INR)": 360, "Calories": 590, "Ingredients": "Prawns, Coconut, Spices"},
+            {"Category": "Non-Vegetarian", "Dish Name": "Egg Curry", "Price (INR)": 250, "Calories": 500, "Ingredients": "Eggs, Tomato, Spices"},
+            {"Category": "Non-Vegetarian", "Dish Name": "Chicken Korma", "Price (INR)": 340, "Calories": 620, "Ingredients": "Chicken, Yogurt, Cream, Spices"},
+            {"Category": "Non-Vegetarian", "Dish Name": "Grilled Fish", "Price (INR)": 330, "Calories": 560, "Ingredients": "Fish, Lemon, Spices"},
+            {"Category": "Non-Vegetarian", "Dish Name": "Tandoori Chicken", "Price (INR)": 310, "Calories": 610, "Ingredients": "Chicken, Yogurt, Spices"},
+            {"Category": "Non-Vegetarian", "Dish Name": "Chicken 65", "Price (INR)": 290, "Calories": 580, "Ingredients": "Chicken, Spices, Curry Leaves"},
+            {"Category": "Sweet", "Dish Name": "Gulab Jamun", "Price (INR)": 80, "Calories": 250, "Ingredients": "Milk, Sugar, Cardamom"},
+            {"Category": "Sweet", "Dish Name": "Rasgulla", "Price (INR)": 70, "Calories": 220, "Ingredients": "Chenna, Sugar Syrup"},
+            {"Category": "Sweet", "Dish Name": "Jalebi", "Price (INR)": 60, "Calories": 300, "Ingredients": "Flour, Sugar, Ghee"},
+            {"Category": "Sweet", "Dish Name": "Kaju Katli", "Price (INR)": 90, "Calories": 270, "Ingredients": "Cashew, Sugar, Ghee"},
+            {"Category": "Sweet", "Dish Name": "Mysore Pak", "Price (INR)": 100, "Calories": 260, "Ingredients": "Besan, Sugar, Ghee"},
+            {"Category": "Sweet", "Dish Name": "Ladoo", "Price (INR)": 60, "Calories": 280, "Ingredients": "Flour, Sugar, Cardamom"},
+            {"Category": "Sweet", "Dish Name": "Rasmalai", "Price (INR)": 110, "Calories": 310, "Ingredients": "Milk, Sugar, Saffron"},
+            {"Category": "Sweet", "Dish Name": "Barfi", "Price (INR)": 95, "Calories": 290, "Ingredients": "Milk, Sugar, Nuts"},
+            {"Category": "Sweet", "Dish Name": "Halwa", "Price (INR)": 85, "Calories": 240, "Ingredients": "Semolina, Ghee, Sugar"},
+            {"Category": "Sweet", "Dish Name": "Sandesh", "Price (INR)": 105, "Calories": 230, "Ingredients": "Chenna, Sugar"},
+            {"Category": "Ice Cream", "Dish Name": "Vanilla Ice Cream", "Price (INR)": 70, "Calories": 200, "Ingredients": "Milk, Cream, Vanilla Essence, Sugar"},
+            {"Category": "Ice Cream", "Dish Name": "Chocolate Ice Cream", "Price (INR)": 80, "Calories": 220, "Ingredients": "Milk, Cream, Cocoa, Sugar"},
+            {"Category": "Ice Cream", "Dish Name": "Strawberry Ice Cream", "Price (INR)": 75, "Calories": 210, "Ingredients": "Milk, Cream, Strawberry, Sugar"},
+            {"Category": "Ice Cream", "Dish Name": "Mango Ice Cream", "Price (INR)": 85, "Calories": 230, "Ingredients": "Milk, Cream, Mango Pulp, Sugar"},
+            {"Category": "Ice Cream", "Dish Name": "Butterscotch Ice Cream", "Price (INR)": 80, "Calories": 215, "Ingredients": "Milk, Cream, Butterscotch, Sugar"}
+        ];
+
+        const categoryColors = {
+            'Vegetarian': 'bg-green-500',
+            'Non-Vegetarian': 'bg-red-500',
+            'Sweet': 'bg-pink-500',
+            'Ice Cream': 'bg-blue-500'
+        };
+
+        function RestaurantMenu() {
+            const [selectedCategory, setSelectedCategory] = useState(null);
+            const [selectedDish, setSelectedDish] = useState(null);
+            const [cart, setCart] = useState([]);
+            const [showCart, setShowCart] = useState(false);
+
+            const categories = [...new Set(menuData.map(item => item.Category))];
+            
+            const filteredDishes = selectedCategory 
+                ? menuData.filter(item => item.Category === selectedCategory)
+                : [];
+
+            const addToCart = (dish) => {
+                setCart([...cart, dish]);
+                setSelectedDish(null);
+            };
+
+            const removeFromCart = (index) => {
+                setCart(cart.filter((_, i) => i !== index));
+            };
+
+            const totalPrice = cart.reduce((sum, item) => sum + item['Price (INR)'], 0);
+
+            const callRestaurant = () => {
+                window.location.href = 'tel:+1234567890';
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
+                    {/* Header */}
+                    <header className="bg-white shadow-md sticky top-0 z-40">
+                        <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
+                            {selectedCategory && (
+                                <button
+                                    onClick={() => setSelectedCategory(null)}
+                                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                >
+                                    <ChevronLeft className="w-6 h-6" />
+                                </button>
+                            )}
+                            <h1 className="text-2xl font-bold text-gray-800 flex-1 text-center">
+                                {selectedCategory || 'Menu'}
+                            </h1>
+                            <button
+                                onClick={() => setShowCart(true)}
+                                className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
+                            >
+                                <ShoppingCart className="w-6 h-6" />
+                                {cart.length > 0 && (
+                                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                                        {cart.length}
+                                    </span>
+                                )}
+                            </button>
+                        </div>
+                    </header>
+
+                    <main className="max-w-md mx-auto p-4">
+                        {/* Category Selection */}
+                        {!selectedCategory && (
+                            <div className="space-y-4 animate-fade-in">
+                                <h2 className="text-xl font-semibold text-gray-700 mb-4">Select a Category</h2>
+                                <div className="grid grid-cols-2 gap-3">
+                                    {categories.map(category => (
+                                        <button
+                                            key={category}
+                                            onClick={() => setSelectedCategory(category)}
+                                            className={`${categoryColors[category]} text-white rounded-xl p-6 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200`}
+                                        >
+                                            <span className="text-lg font-semibold">{category}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Dish Listing */}
+                        {selectedCategory && !selectedDish && (
+                            <div className="space-y-3 animate-fade-in">
+                                {filteredDishes.map((dish, index) => (
+                                    <div
+                                        key={index}
+                                        onClick={() => setSelectedDish(dish)}
+                                        className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+                                    >
+                                        <div className="flex justify-between items-center">
+                                            <h3 className="text-lg font-semibold text-gray-800">{dish['Dish Name']}</h3>
+                                            <span className="text-lg font-bold text-orange-600">₹{dish['Price (INR)']}</span>
+                                        </div>
+                                        <p className="text-sm text-gray-500 mt-1">{dish.Calories} cal</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </main>
+
+                    {/* Dish Detail Modal */}
+                    {selectedDish && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center p-4 animate-fade-in">
+                            <div className="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+                                <div className="p-6">
+                                    <div className="flex justify-between items-start mb-4">
+                                        <h2 className="text-2xl font-bold text-gray-800">{selectedDish['Dish Name']}</h2>
+                                        <button
+                                            onClick={() => setSelectedDish(null)}
+                                            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                        >
+                                            <X className="w-6 h-6" />
+                                        </button>
+                                    </div>
+                                    
+                                    <div className="space-y-4">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-3xl font-bold text-orange-600">₹{selectedDish['Price (INR)']}</span>
+                                            <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                                                {selectedDish.Calories} calories
+                                            </span>
+                                        </div>
+                                        
+                                        <div>
+                                            <h3 className="font-semibold text-gray-700 mb-2">Ingredients</h3>
+                                            <p className="text-gray-600">{selectedDish.Ingredients}</p>
+                                        </div>
+
+                                        <div className="flex gap-3 pt-4">
+                                            <button
+                                                onClick={() => addToCart(selectedDish)}
+                                                className="flex-1 bg-orange-500 text-white py-3 rounded-xl font-semibold hover:bg-orange-600 transition-colors"
+                                            >
+                                                Add to Cart
+                                            </button>
+                                            <button
+                                                onClick={callRestaurant}
+                                                className="flex-1 bg-green-500 text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
+                                            >
+                                                <Phone className="w-5 h-5" />
+                                                Call
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Cart Modal */}
+                    {showCart && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end sm:items-center justify-center p-4 animate-fade-in">
+                            <div className="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+                                <div className="p-6">
+                                    <div className="flex justify-between items-center mb-4">
+                                        <h2 className="text-2xl font-bold text-gray-800">Your Cart</h2>
+                                        <button
+                                            onClick={() => setShowCart(false)}
+                                            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                        >
+                                            <X className="w-6 h-6" />
+                                        </button>
+                                    </div>
+
+                                    {cart.length === 0 ? (
+                                        <p className="text-gray-500 text-center py-8">Your cart is empty</p>
+                                    ) : (
+                                        <>
+                                            <div className="space-y-3 mb-6">
+                                                {cart.map((item, index) => (
+                                                    <div key={index} className="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
+                                                        <div>
+                                                            <h3 className="font-semibold text-gray-800">{item['Dish Name']}</h3>
+                                                            <span className="text-orange-600 font-medium">₹{item['Price (INR)']}</span>
+                                                        </div>
+                                                        <button
+                                                            onClick={() => removeFromCart(index)}
+                                                            className="text-red-500 hover:bg-red-50 p-2 rounded-full transition-colors"
+                                                        >
+                                                            <X className="w-5 h-5" />
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            <div className="border-t pt-4">
+                                                <div className="flex justify-between items-center mb-4">
+                                                    <span className="text-lg font-semibold text-gray-700">Total</span>
+                                                    <span className="text-2xl font-bold text-orange-600">₹{totalPrice}</span>
+                                                </div>
+                                                <button
+                                                    onClick={callRestaurant}
+                                                    className="w-full bg-green-500 text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
+                                                >
+                                                    <Phone className="w-5 h-5" />
+                                                    Call to Order
+                                                </button>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<RestaurantMenu />);
+    </script>
+</body>
+</html>
